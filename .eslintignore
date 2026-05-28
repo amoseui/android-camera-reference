@@ -1,0 +1,6 @@
+dist/
+generated/
+.cache/
+node_modules/
+*.config.ts
+*.config.cjs
