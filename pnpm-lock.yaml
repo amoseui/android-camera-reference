@@ -55,6 +55,22 @@ importers:
         specifier: ^1.6.0
         version: 1.6.1(@types/node@20.19.41)
 
+  packages/extractor-fixture:
+    dependencies:
+      '@acref/extractor-core':
+        specifier: workspace:^
+        version: link:../extractor-core
+      '@acref/schema':
+        specifier: workspace:^
+        version: link:../schema
+    devDependencies:
+      typescript:
+        specifier: ^5.4.0
+        version: 5.9.3
+      vitest:
+        specifier: ^1.6.0
+        version: 1.6.1(@types/node@20.19.41)
+
   packages/schema:
     dependencies:
       zod:
