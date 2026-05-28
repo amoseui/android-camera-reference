@@ -37,7 +37,7 @@ export function runValidators(input: RunInput, options: RunOptions = {}): RunRes
     actualNodeIds: Object.keys(input.nodes),
   });
   const freshness = validateFreshness({
-    nodes: input.nodes as Record<string, { provenance: never[] }>,
+    nodes: input.nodes,
     currentRefByRepo: input.currentRefByRepo ?? {},
   });
 

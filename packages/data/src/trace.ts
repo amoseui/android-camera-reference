@@ -8,13 +8,13 @@ export function tracesToFrameworkOf(
 ): string[] {
   const node = data.nodes[nodeId];
   if (!node) return [];
-  return resolveVersioned(node.tracesToFramework as never, apiLevel) ?? [];
+  return resolveVersioned<string[]>(node.tracesToFramework, apiLevel) ?? [];
 }
 
 export function tracesToHalOf(data: AcrefData, nodeId: string, apiLevel: number): string[] {
   const node = data.nodes[nodeId];
   if (!node) return [];
-  return resolveVersioned(node.tracesToHal as never, apiLevel) ?? [];
+  return resolveVersioned<string[]>(node.tracesToHal, apiLevel) ?? [];
 }
 
 export function reverseTraceFromHal(data: AcrefData, halId: string): string[] {

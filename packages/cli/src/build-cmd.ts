@@ -1,4 +1,5 @@
 import { readdir } from 'node:fs/promises';
+import type { Dirent } from 'node:fs';
 import { join } from 'node:path';
 import { readYaml } from '@acref/extractor-core';
 import { consolidateNodes, buildIndex } from '@acref/indexer';
@@ -14,11 +15,7 @@ async function walkYaml(
   d: string,
   nodesByTarget: Record<string, Record<string, unknown>>,
 ): Promise<void> {
-  const entries = (await readdir(d, { withFileTypes: true })) as never as Array<{
-    name: string;
-    isDirectory(): boolean;
-    isFile(): boolean;
-  }>;
+  const entries: Dirent[] = await readdir(d, { withFileTypes: true });
   for (const e of entries) {
     const full = join(d, e.name);
     if (e.isDirectory()) await walkYaml(full, nodesByTarget);
@@ -33,9 +30,9 @@ async function loadGeneratedByTarget(
   dir: string,
 ): Promise<Record<number, Record<string, Record<string, unknown>>>> {
   const result: Record<number, Record<string, Record<string, unknown>>> = {};
-  let targetDirs: { name: string; isDirectory: () => boolean }[] = [];
+  let targetDirs: Dirent[] = [];
   try {
-    targetDirs = (await readdir(dir, { withFileTypes: true })) as never;
+    targetDirs = await readdir(dir, { withFileTypes: true });
   } catch {
     return result;
   }

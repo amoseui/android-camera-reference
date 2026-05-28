@@ -1,4 +1,5 @@
 import { readdir } from 'node:fs/promises';
+import type { Dirent } from 'node:fs';
 import { join } from 'node:path';
 import { readYaml } from '@acref/extractor-core';
 import { runValidators } from '@acref/validators';
@@ -18,9 +19,9 @@ export interface ValidateResult {
 
 async function loadAllYaml(dir: string): Promise<Record<string, Record<string, unknown>>> {
   const result: Record<string, Record<string, unknown>> = {};
-  let entries: { name: string; isDirectory: () => boolean; isFile: () => boolean }[] = [];
+  let entries: Dirent[] = [];
   try {
-    entries = (await readdir(dir, { withFileTypes: true })) as never;
+    entries = await readdir(dir, { withFileTypes: true });
   } catch {
     return result;
   }

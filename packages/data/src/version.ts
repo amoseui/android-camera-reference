@@ -1,7 +1,7 @@
 import { parseVersionRange } from '@acref/schema';
 
 export function resolveVersioned<T>(
-  versioned: T | Record<string, T> | undefined,
+  versioned: unknown,
   apiLevel: number,
 ): T | undefined {
   if (versioned === undefined) return undefined;
