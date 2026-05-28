@@ -1,0 +1,21 @@
+{
+  "name": "@acref/cli",
+  "version": "0.0.1",
+  "type": "module",
+  "bin": { "acref": "./dist/cli.js" },
+  "main": "./src/cli.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@acref/schema": "workspace:^",
+    "@acref/extractor-core": "workspace:^",
+    "@acref/extractor-fixture": "workspace:^",
+    "@acref/validators": "workspace:^",
+    "@acref/indexer": "workspace:^",
+    "cac": "^6.7.14",
+    "yaml": "^2.4.5"
+  },
+  "devDependencies": { "typescript": "^5.4.0", "vitest": "^1.6.0", "tsx": "^4.11.0", "@types/node": "^20.12.0" }
+}
