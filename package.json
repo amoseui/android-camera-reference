@@ -1,0 +1,27 @@
+{
+  "name": "acref-monorepo",
+  "version": "0.0.1",
+  "private": true,
+  "packageManager": "pnpm@9.12.0",
+  "engines": { "node": ">=20.9.0", "pnpm": ">=9.0.0" },
+  "scripts": {
+    "build": "pnpm -r build",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:unit": "vitest run -t unit",
+    "test:integration": "vitest run -t integration",
+    "test:golden": "vitest run -t golden",
+    "test:property": "vitest run -t property",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0",
+    "fast-check": "^3.19.0",
+    "@vitest/coverage-v8": "^1.6.0",
+    "eslint": "^8.57.0",
+    "@typescript-eslint/eslint-plugin": "^7.8.0",
+    "@typescript-eslint/parser": "^7.8.0",
+    "prettier": "^3.2.5"
+  }
+}
