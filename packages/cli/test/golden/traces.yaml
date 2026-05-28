@@ -1,0 +1,9 @@
+target: 35
+expectations:
+  - from: "cameraX/androidx/camera/core/ImageCapture/takePicture(java.util.concurrent.Executor)"
+    tracesToHal:
+      - "hal/ICameraDeviceSession::processCaptureRequest_v3.7"
+    tracesToFramework:
+      - "framework/android/hardware/camera2/CameraCaptureSession#capture(android.hardware.camera2.CaptureRequest)"
+    requiresPermission:
+      - "permission/android.permission.CAMERA"
