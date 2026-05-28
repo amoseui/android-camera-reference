@@ -6,7 +6,7 @@
   "engines": { "node": ">=20.9.0", "pnpm": ">=9.0.0" },
   "scripts": {
     "build": "pnpm -r build",
-    "lint": "eslint .",
+    "lint": "eslint . --no-error-on-unmatched-pattern",
     "test": "vitest run",
     "test:unit": "vitest run -t unit",
     "test:integration": "vitest run -t integration",
