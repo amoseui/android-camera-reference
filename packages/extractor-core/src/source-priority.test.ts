@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { GLOBAL_PRIORITY, comparePriority } from './source-priority.js';
-import { FIELD_AFFINITY, isSourceAllowed } from './affinity.js';
+import { isSourceAllowed } from './affinity.js';
 
 describe('source priority', () => {
   describe('unit: GLOBAL_PRIORITY order', () => {

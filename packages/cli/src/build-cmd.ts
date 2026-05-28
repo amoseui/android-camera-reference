@@ -10,6 +10,25 @@ export interface BuildInput {
   dataVersion: string;
 }
 
+async function walkYaml(
+  d: string,
+  nodesByTarget: Record<string, Record<string, unknown>>,
+): Promise<void> {
+  const entries = (await readdir(d, { withFileTypes: true })) as never as Array<{
+    name: string;
+    isDirectory(): boolean;
+    isFile(): boolean;
+  }>;
+  for (const e of entries) {
+    const full = join(d, e.name);
+    if (e.isDirectory()) await walkYaml(full, nodesByTarget);
+    else if (e.isFile() && e.name.endsWith('.yaml')) {
+      const node = await readYaml<Record<string, unknown>>(full);
+      nodesByTarget[node.id as string] = node;
+    }
+  }
+}
+
 async function loadGeneratedByTarget(
   dir: string,
 ): Promise<Record<number, Record<string, Record<string, unknown>>>> {
@@ -26,23 +45,7 @@ async function loadGeneratedByTarget(
     if (Number.isNaN(target)) continue;
     const targetPath = join(dir, ent.name);
     const nodesByTarget: Record<string, Record<string, unknown>> = {};
-
-    async function walk(d: string): Promise<void> {
-      const entries = (await readdir(d, { withFileTypes: true })) as never as Array<{
-        name: string;
-        isDirectory(): boolean;
-        isFile(): boolean;
-      }>;
-      for (const e of entries) {
-        const full = join(d, e.name);
-        if (e.isDirectory()) await walk(full);
-        else if (e.isFile() && e.name.endsWith('.yaml')) {
-          const node = await readYaml<Record<string, unknown>>(full);
-          nodesByTarget[node.id as string] = node;
-        }
-      }
-    }
-    await walk(targetPath);
+    await walkYaml(targetPath, nodesByTarget);
     result[target] = nodesByTarget;
   }
   return result;
