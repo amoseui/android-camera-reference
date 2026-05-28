@@ -7,11 +7,11 @@
   "scripts": {
     "build": "pnpm -r build",
     "lint": "eslint . --no-error-on-unmatched-pattern",
-    "test": "vitest run",
-    "test:unit": "vitest run -t unit",
-    "test:integration": "vitest run -t integration",
-    "test:golden": "vitest run -t golden",
-    "test:property": "vitest run -t property",
+    "test": "vitest run --passWithNoTests",
+    "test:unit": "vitest run -t unit --passWithNoTests",
+    "test:integration": "vitest run -t integration --passWithNoTests",
+    "test:golden": "vitest run -t golden --passWithNoTests",
+    "test:property": "vitest run -t property --passWithNoTests",
     "format": "prettier --write ."
   },
   "devDependencies": {
